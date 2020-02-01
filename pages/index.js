@@ -1,13 +1,14 @@
 import RoomService from "@roomservice/browser";
 import { useRoomService } from "@roomservice/react";
 import React from "react";
+import GameBlock from "../components/gameBlock";
 
 const client = new RoomService({
   authUrl: "http://localhost:3000/api/roomservice"
 });
 
 export default () => {
-  const [doc, setDoc] = useRoomService(client, "my-room");
+  const [state, setState] = useRoomService(client, "tic-tac-toe");
 
   function onClick() {
     setDoc(prevDoc => {
@@ -17,11 +18,21 @@ export default () => {
 
   return (
     <div>
-      <h1>Open multiple browser windows!</h1>
-
-      <p>{doc.number || 0}</p>
-
-      <button onClick={onClick}>Pick Random Number</button>
+      <h1>Collaborative Tic Tac Toe Demo</h1>
+      <div className="gameContainer">
+        <GameBlock />
+        <GameBlock />
+        <GameBlock />
+        <GameBlock />
+        <GameBlock />
+      </div>
+      <style jsx>{`
+        .gameContainer {
+          height: 600px;
+          width: 600px;
+          background-color: red;
+        }
+      `}</style>
     </div>
   );
 };

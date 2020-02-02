@@ -8,154 +8,26 @@ const client = new RoomService({
 });
 
 export default () => {
-  const [state, setState] = useRoomService(client, "tic-tac-toe");
+  const [state, setState] = useRoomService(client, "tic-tac-toe-2");
 
-  function onClickOne() {
+  function onClick(index) {
     setState(state => {
-      state.one = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
+      if (!state.blocks) state.blocks = new Array(9).fill("");
 
-  function onClickTwo() {
-    setState(state => {
-      state.two = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
+      if (state.turn === "X") {
         state.turn = "O";
-      });
-    } else {
-      setState(state => {
+      } else {
         state.turn = "X";
-      });
-    }
-  }
+      }
 
-  function onClickThree() {
-    setState(state => {
-      state.three = state.turn;
+      state.blocks[index] = state.turn;
     });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickFour() {
-    setState(state => {
-      state.four = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickFive() {
-    setState(state => {
-      state.five = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickSix() {
-    setState(state => {
-      state.six = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickSeven() {
-    setState(state => {
-      state.seven = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickEight() {
-    setState(state => {
-      state.eight = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
-  }
-
-  function onClickNine() {
-    setState(state => {
-      state.nine = state.turn;
-    });
-    if (state.turn === "X") {
-      setState(state => {
-        state.turn = "O";
-      });
-    } else {
-      setState(state => {
-        state.turn = "X";
-      });
-    }
   }
 
   function reset() {
     setState(state => {
-      state.one = "";
-      state.two = "";
-      state.three = "";
-      state.four = "";
-      state.five = "";
-      state.six = "";
-      state.seven = "";
-      state.eight = "";
-      state.nine = "";
+      state.turn = "X";
+      state.blocks = new Array(9).fill("");
     });
   }
 
@@ -166,48 +38,48 @@ export default () => {
       <div>Current Turn = {state.turn}</div>
       <div className="gameContainer">
         <GameBlock
-          selection={state.one}
-          onClick={onClickOne}
+          selection={state.blocks ? state.blocks[0] : ""}
+          onClick={() => onClick(0)}
           borderWidth="0px 5px 5px 0px"
         />
         <GameBlock
-          selection={state.two}
-          onClick={onClickTwo}
+          selection={state.blocks ? state.blocks[1] : ""}
+          onClick={() => onClick(1)}
           borderWidth="0px 5px 5px 5px"
         />
         <GameBlock
-          selection={state.three}
-          onClick={onClickThree}
+          selection={state.blocks ? state.blocks[2] : ""}
+          onClick={() => onClick(2)}
           borderWidth="0px 0px 5px 5px"
         />
         <GameBlock
-          selection={state.four}
-          onClick={onClickFour}
+          selection={state.blocks ? state.blocks[3] : ""}
+          onClick={() => onClick(3)}
           borderWidth="5px 5px 5px 0px"
         />
         <GameBlock
-          selection={state.five}
-          onClick={onClickFive}
+          selection={state.blocks ? state.blocks[4] : ""}
+          onClick={() => onClick(4)}
           borderWidth="5px"
         />
         <GameBlock
-          selection={state.six}
-          onClick={onClickSix}
+          selection={state.blocks ? state.blocks[5] : ""}
+          onClick={() => onClick(5)}
           borderWidth="5px 0px 5px 5px"
         />
         <GameBlock
-          selection={state.seven}
-          onClick={onClickSeven}
+          selection={state.blocks ? state.blocks[6] : ""}
+          onClick={() => onClick(6)}
           borderWidth="5px 5px 0px 0px"
         />
         <GameBlock
-          selection={state.eight}
-          onClick={onClickEight}
+          selection={state.blocks ? state.blocks[7] : ""}
+          onClick={() => onClick(7)}
           borderWidth="5px 5px 0px 5px"
         />
         <GameBlock
-          selection={state.nine}
-          onClick={onClickNine}
+          selection={state.blocks ? state.blocks[8] : ""}
+          onClick={() => onClick(8)}
           borderWidth="5px 0px 0px 5px"
         />
       </div>
@@ -223,6 +95,3 @@ export default () => {
     </div>
   );
 };
-
-// on click pushes in a state into the component display
-// state.turn rotates X or O

@@ -31,6 +31,8 @@ export default () => {
     });
   }
 
+  // need to combine selection;
+
   return (
     <div>
       <h1>Collaborative Tic Tac Toe Demo</h1>
